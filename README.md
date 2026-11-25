@@ -1,17 +1,37 @@
-# responsi_weather_app
+# Responsi Praktikum Pemrograman Mobile - Weather App
 
-Aplikasi Cuaca Open-Meteo untuk Responsi Praktikum Pemrograman Mobile
+Aplikasi ramalan cuaca berbasis Flutter yang mengimplementasikan arsitektur **Model-View-ViewModel (MVVM)**, konsumsi REST API dari **Open-Meteo**, serta persistensi lokal menggunakan **SharedPreferences**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Antarmuka Aplikasi
 
-A few resources to get you started if this is your first Flutter project:
+| Home Screen (Cuaca & Forecast) | Search Screen & Favorit |
+|:---:|:---:|
+| ![Home Screen](screenshots/home_screen.png) | ![Search Screen](screenshots/search_screen.png) |
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Pola Arsitektur MVVM
+
+Aplikasi disusun menggunakan pemisahan tanggung jawab (*Separation of Concerns*) berbasis arsitektur MVVM:
+
+```text
+lib/
+├── models/         # Representasi data & JSON Serialization
+│   ├── location_model.dart
+│   └── weather_model.dart
+├── services/       # Komunikasi HTTP API & Storage
+│   ├── weather_service.dart
+│   └── storage_service.dart
+├── viewmodels/     # State management & bisnis logic (ChangeNotifier)
+│   ├── weather_viewmodel.dart
+│   └── search_viewmodel.dart
+├── views/          # Antarmuka layar aplikasi
+│   ├── home_screen.dart
+│   ├── search_screen.dart
+│   └── widgets/    # Komponen modular reusable
+│       ├── weather_info_card.dart
+│       └── daily_forecast_item.dart
+└── utils/          # Helper WMO Weather Code
+    └── weather_helper.dart
